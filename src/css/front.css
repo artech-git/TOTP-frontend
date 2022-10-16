@@ -1,0 +1,219 @@
+:root {
+  font-size: 16px;
+  font-family: "Ubuntu", sans-serif;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  background-image: url("https://images8.alphacoders.com/679/thumb-1920-679478.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  font-family: "Whitney", sans-serif;
+  text-rendering: optimizeLegibility;
+  user-select: none;
+}
+
+html,
+body,
+.row {
+  height: 100%;
+  text-align: center;
+}
+
+.pen-info {
+  color: #d4d3d4;
+  font-size: 80%;
+  text-transform: uppercase;
+}
+
+.c-button {
+  color: #000;
+  font-weight: 700;
+  font-size: 1em;
+  text-decoration: none;
+  padding: 0.7em 1.8em;
+  margin: 0.5em;
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.c-button--gooey {
+  color: #daa172;
+  font-size: 1.3em;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border: 4px solid #daa172;
+  border-radius: 0;
+  padding: 1.2em 3.4em;
+  position: relative;
+  transition: all 700ms ease;
+  box-shadow: 0 8px 24px 0 rgba(141, 97, 60, 0.1);
+}
+
+#c-button-register {
+  color: #daa172;
+  font-size: 1.3em;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border: 4px solid #daa172;
+  border-radius: 0;
+  padding: 1.2em 2.4em;
+  position: relative;
+  transition: all 700ms ease;
+  box-shadow: 0 8px 24px 0 rgba(141, 97, 60, 0.1);
+}
+
+.c-button--gooey .c-button__blobs {
+  height: 100%;
+  filter: url(#goo);
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: -3px;
+  right: -1px;
+  z-index: -1;
+}
+.c-button--gooey .c-button__blobs div {
+  background-color: #daa172;
+  width: 34%;
+  height: 100%;
+  border-radius: 100%;
+  position: absolute;
+  transform: scale(1.4) translateY(125%) translateZ(0);
+  transition: all 700ms ease;
+  box-shadow: 0 8px 24px 0 rgba(141, 97, 60, 0.1);
+}
+.c-button--gooey .c-button__blobs div:nth-child(1) {
+  left: -5%;
+}
+.c-button--gooey .c-button__blobs div:nth-child(2) {
+  left: 30%;
+  transition-delay: 60ms;
+}
+.c-button--gooey .c-button__blobs div:nth-child(3) {
+  left: 66%;
+  transition-delay: 25ms;
+}
+.c-button--gooey:hover {
+  color: #fff;
+}
+.c-button--gooey:hover .c-button__blobs div {
+  transform: scale(1.4) translateY(0) translateZ(0);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #1a1a1a;
+  position: relative;
+}
+
+.c {
+  width: 42vh;
+  height: 42vh;
+  position: absolute;
+  bottom: -22.2222222222vh;
+  left: 0;
+  border-radius: 43% 40% 43% 40%;
+  background: #daa172;
+  -webkit-animation: bounce 1s infinite alternate, wave 2s infinite linear,
+    waking 7s infinite alternate linear;
+  animation: bounce 1s infinite alternate, wave 2s infinite linear,
+    waking 7s infinite alternate linear;
+}
+.c-e {
+  width: 6.6666666667vh;
+  height: 6.6666666667vh;
+  border: 1.7391304348vh solid #fff;
+  transform: translateY(0);
+  border-radius: 50%;
+  -webkit-animation: blink 4s infinite linear;
+  animation: blink 4s infinite linear;
+}
+.c-c {
+  display: flex;
+  justify-content: space-around;
+  position: absolute;
+  width: 34vh;
+  bottom: 4vh;
+  z-index: 1;
+  left: 10vh;
+  padding: 0 0.8vw;
+  z-index: 1;
+  -webkit-animation: waking 7s infinite alternate linear;
+  animation: waking 7s infinite alternate linear;
+}
+
+@-webkit-keyframes wave {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes wave {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes waking {
+  100% {
+    left: calc(100% - 40vh);
+  }
+}
+@keyframes waking {
+  100% {
+    left: calc(100% - 40vh);
+  }
+}
+@-webkit-keyframes bounce {
+  100% {
+    bottom: -26.6666666667vh;
+  }
+}
+@keyframes bounce {
+  100% {
+    bottom: -26.6666666667vh;
+  }
+}
+@-webkit-keyframes blink {
+  0%,
+  5%,
+  30%,
+  37%,
+  100% {
+    height: 6.6666666667vh;
+    border-width: 1.8181818182vh;
+    transform: translateY(0);
+  }
+  3%,
+  33% {
+    height: 0;
+    border-width: 0;
+    transform: translateY(-4vh);
+  }
+}
+@keyframes blink {
+  0%,
+  5%,
+  30%,
+  37%,
+  100% {
+    height: 6.6666666667vh;
+    border-width: 1.8181818182vh;
+    transform: translateY(0);
+  }
+  3%,
+  33% {
+    height: 0;
+    border-width: 0;
+    transform: translateY(-4vh);
+  }
+}

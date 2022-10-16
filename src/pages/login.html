@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Login - TOTP</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+      integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
+      crossorigin="anonymous"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/register.css" />
+  </head>
+  <body>
+    <canvas id="svgBlob"></canvas>
+
+    <div class="position">
+      <form class="container">
+        <div class="centering-wrapper">
+          <div class="section1 text-center">
+            <div class="primary-header">Greetings ugy fwiend :3</div>
+            <div class="secondary-header">
+              Fill the input fields below to login!
+            </div>
+            <div class="input-position">
+              <div class="form-group">
+                <h5 class="input-placeholder" id="email-txt">
+                  Email<span class="error-message" id="email-error"></span>
+                </h5>
+                <input
+                  type="email"
+                  required="true"
+                  name="logemail"
+                  class="form-style"
+                  id="logemail"
+                  autocomplete="off"
+                  style="margin-bottom: 0.5em"
+                />
+                <i class="input-icon uil uil-at"></i>
+              </div>
+              <div class="form-group">
+                <h5 class="input-placeholder" id="uname-txt">
+                  Username<span class="error-message" id="uname-error"></span>
+                </h5>
+                <input
+                  type="text"
+                  required="true"
+                  name="loguname"
+                  class="form-style"
+                  id="logp"
+                  autocomplete="off"
+                  style="margin-bottom: 0.5em"
+                />
+                <i class="input-icon uil uil-lock-alt"></i>
+              </div>
+              <div class="form-group">
+                <h5 class="input-placeholder" id="pword-txt">
+                  Passwowd<span
+                    class="error-message"
+                    id="password-error"
+                  ></span>
+                </h5>
+                <input
+                  type="password"
+                  required="true"
+                  name="logpass"
+                  class="form-style"
+                  id="logpass"
+                  autocomplete="on"
+                  style="margin-bottom: 0.5em"
+                />
+                <i class="input-icon uil uil-lock-alt"></i>
+              </div>
+            </div>
+            <div class="btn-position">
+              <a href="#" class="btn">Login</a>
+            </div>
+          </div>
+          <div class="horizontalSeparator"></div>
+          <!-- <div class="qr-login">
+            <div class="qr-container">
+              can add a smol image here??
+              <canvas id="qr-code"></canvas>
+            </div>
+            <div class="qr-pheader">Scan QR</div>
+            <div class="qr-sheader">
+              Scan this with the <strong>scanner app</strong> to get token
+            </div>
+          </div> -->
+        </div>
+      </form>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+    <script src="../js/register.js"></script>
+  </body>
+</html>
