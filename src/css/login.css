@@ -37,7 +37,7 @@ body {
 }
 
 .container {
-  width: 784px;
+  width: 30em;
   max-width: 90vw;
   padding: 32px;
   background-color: #1a1a1a;
@@ -254,7 +254,7 @@ body {
   text-decoration: underline;
 }
 
-.horizontalSeparator {
+/* .horizontalSeparator {
   margin: 0 2.5vw;
   border: 1px solid #363940;
 }
@@ -310,7 +310,7 @@ body {
   font-size: 16px;
   line-height: 20px;
   color: #a2a3a7;
-}
+} */
 
 @media only screen and (max-width: 768px) {
   body {

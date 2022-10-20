@@ -3,6 +3,7 @@ const password = document.getElementById("logpass");
 const login = document.querySelector(".btn");
 const ptxt = document.getElementById("pword-txt");
 const etxt = document.getElementById("email-txt");
+const ttxt = document.getElementById("token-txt");
 const Eerror = document.getElementById("email-error");
 const perror = document.getElementById("password-error");
 const input = document.querySelector(".form-style");
@@ -45,6 +46,8 @@ login.addEventListener('click', (e) => {
     password.style.borderColor = "";
   }, 2500)
 });
+
+function verify(etxt, ptxt) {}
 
 const canvas = document.getElementById('svgBlob');
 const ctx = canvas.getContext('2d');
@@ -130,14 +133,3 @@ window.addEventListener('resize', function () {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
 })
-
-// use email, username and password to get qr-code string 
-// then put it in "value: <string-here>" to get the QR Code
-var qr;
-(function () {
-  qr = new QRious({
-    element: document.getElementById('qr-code'),
-    size: 170,
-    value: 'https://youtu.be/k625HpF1iXc?t=2'
-  });
-})();

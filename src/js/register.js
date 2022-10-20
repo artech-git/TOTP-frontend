@@ -138,6 +138,6 @@ var qr;
   qr = new QRious({
     element: document.getElementById('qr-code'),
     size: 170,
-    value: 'https://youtu.be/k625HpF1iXc?t=2'
+    value: 'https://youtu.be/k625HpF1iXc?t=2',
   });
 })();
