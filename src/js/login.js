@@ -1,77 +1,100 @@
-const email = document.getElementById("logemail");
-const password = document.getElementById("logpass");
+const email = document.getElementById("login_email");
+const password = document.getElementById("login_passwd");
+const token = document.getElementById("login_token");
 const login = document.querySelector(".btn");
-const ptxt = document.getElementById("pword-txt");
-const etxt = document.getElementById("email-txt");
-const ttxt = document.getElementById("token-txt");
-const Eerror = document.getElementById("email-error");
-const perror = document.getElementById("password-error");
+const pass_txt = document.getElementById("passwd-txt");
+const email_txt = document.getElementById("email-txt");
+const token_txt = document.getElementById("token-txt");
+const email_err = document.getElementById("email-error");
+const pass_err = document.getElementById("passwd-error");
+const token_err = document.getElementById("token-error");
 const input = document.querySelector(".form-style");
 const container = document.querySelector(".container");
-const esearch = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
-const psearch = /[a-z]{8,32}/g;
+const email_search = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+const pass_search = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
 
-login.addEventListener('click', (e) => {
-  if (!password.value.match(psearch)) {
-    password.focus();
-    e.preventDefault();
-    password.style.borderColor = "#ec4846";
-    ptxt.style.color = "#ec4846";
-    perror.innerText = " - Password should be between 8 and 32 characters";
-  }
-  else if (email.value === "" || !email.value.match(esearch)) {
+// dummy login data
+const login_data = {
+  email: "test@gmail.com",
+  pass: "N!kk@t3st",
+  token: "123456",
+};
+
+login.addEventListener("click", (e) => {
+  if (email.value === "" || !email.value.match(email_search)) {
     email.focus();
     e.preventDefault();
     email.style.borderColor = "#ec4846";
-    etxt.style.color = "#ec4846";
-    Eerror.innerText = " - This is not a valid email address";
+    email_txt.style.color = "#ec4846";
+    email_err.innerText = " - Incorrect email";
+  } else if (!password.value.match(pass_search)) {
+    password.focus();
+    e.preventDefault();
+    password.style.borderColor = "#ec4846";
+    pass_txt.style.color = "#ec4846";
+    pass_err.innerText = " - Incorrect password";
+  } else if (token.value === "") {
+    token.focus();
+    e.preventDefault();
+    token.style.borderColor = "#ec4846";
+    token_txt.style.color = "#ec4846";
+    token_err.innerText = " - Invalid token";
   } else {
-    email.value = "";
-    password.value = "";
-    container.style.animation = "jump .3s linear";
-    container.addEventListener('animationend', () => {
-      container.style.display = "none";
-      canvas.style.transform = "translate(0vw)";
-      // setTimeout(() => {
-      user.login = true;
-      //}, 1000)
-    })
+    // console.log("Logged in")
+    if (
+      login_data.email === email.value &&
+      login_data.pass === password.value
+    ) {
+      console.log("Credentials are OKAY AS FUCK");
+      if (login_data.token === token.value) {
+        user.logged_in = true;
+        console.clear();
+        console.log("Successfully logged in!");
+      } else {
+        console.log("Auth token ain't tokenin'");
+      }
+    } else {
+      console.log("Credentials ain't credentialing :(");
+    }
   }
   setTimeout(() => {
-    ptxt.style.color = "#919296";
-    etxt.style.color = "#919296";
-    perror.innerText = "";
-    Eerror.innerText = "";
+    pass_txt.style.color = "#919296";
+    email_txt.style.color = "#919296";
+    token_txt.style.color = "#919296";
+    pass_err.innerText = "";
+    email_err.innerText = "";
+    token_err.innerText = "";
     email.style.borderColor = "";
     password.style.borderColor = "";
-  }, 2500)
+    token.style.borderColor = "";
+  }, 2500);
 });
 
-function verify(etxt, ptxt) {}
-
-const canvas = document.getElementById('svgBlob');
-const ctx = canvas.getContext('2d');
+// background animation
+const canvas = document.getElementById("svgBlob");
+const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 let numParticles = 20;
 let particles = [];
 
-const colors = ["#9192296", "#daa172", "#d69662"]; 1
+const colors = ["#9192296", "#daa172", "#d69662"];
+1;
 
 const mouse = {
-  x: null
-}
+  x: null,
+};
 
 let user = {
-  login: false
-}
+  logged_in: false,
+};
 
 class Particle {
   constructor() {
     this.x = Math.random() * canvas.width;
-    this.y = canvas.height + (Math.random() * 200);
-    this.radius = (Math.random() * 6) + 3;
-    this.speedX = (Math.random() * 6);
+    this.y = canvas.height + Math.random() * 200;
+    this.radius = Math.random() * 6 + 3;
+    this.speedX = Math.random() * 6;
     this.moveRight = this.x + this.speedX;
     this.moveLeft = this.x - this.speedX;
     this.speedY = Math.random() * 1;
@@ -86,7 +109,7 @@ class Particle {
   }
   update() {
     this.draw();
-    if (!user.login) {
+    if (!user.logged_in) {
       this.y -= this.speedY;
     } else {
       this.y -= 10;
@@ -107,9 +130,9 @@ function setup() {
   }
 }
 
-window.addEventListener('mousemove', (e) => {
+window.addEventListener("mousemove", (e) => {
   mouse.x = e.x;
-})
+});
 
 function animate() {
   requestAnimationFrame(animate);
@@ -119,17 +142,17 @@ function animate() {
     if (particle.y + particle.radius < 0) {
       setTimeout(() => {
         particles.splice(index, 1);
-      }, 0)
-      if (!user.login) {
+      }, 0);
+      if (!user.logged_in) {
         particles.push(new Particle());
       }
     }
-  })
+  });
 }
 setup();
 animate();
 
-window.addEventListener('resize', function () {
+window.addEventListener("resize", function () {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
-})
+});

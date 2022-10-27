@@ -1,74 +1,112 @@
-const email = document.getElementById("logemail");
-const password = document.getElementById("logpass");
-const login = document.querySelector(".btn");
-const ptxt = document.getElementById("pword-txt");
-const etxt = document.getElementById("email-txt");
-const Eerror = document.getElementById("email-error");
-const perror = document.getElementById("password-error");
+const email = document.getElementById("register_email");
+const username = document.getElementById("register_username");
+const password = document.getElementById("register_passwd");
+const register = document.querySelector(".btn");
+const pass_txt = document.getElementById("pword-txt");
+const email_txt = document.getElementById("email-txt");
+const email_err = document.getElementById("email-error");
+const pass_err = document.getElementById("password-error");
 const input = document.querySelector(".form-style");
 const container = document.querySelector(".container");
-const esearch = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
-const psearch = /[a-z]{8,32}/g;
+const email_search = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+const pass_search = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
 
-login.addEventListener('click', (e) => {
-  if (!password.value.match(psearch)) {
-    password.focus();
-    e.preventDefault();
-    password.style.borderColor = "#ec4846";
-    ptxt.style.color = "#ec4846";
-    perror.innerText = " - Password should be between 8 and 32 characters";
-  }
-  else if (email.value === "" || !email.value.match(esearch)) {
+register.addEventListener("click", (e) => {
+  if (email.value === "" || !email.value.match(email_search)) {
     email.focus();
     e.preventDefault();
     email.style.borderColor = "#ec4846";
-    etxt.style.color = "#ec4846";
-    Eerror.innerText = " - This is not a valid email address";
+    email_txt.style.color = "#ec4846";
+    email_err.innerText = " - This is not a valid email address";
+  } else if (!password.value.match(pass_search)) {
+    password.focus();
+    e.preventDefault();
+    password.style.borderColor = "#ec4846";
+    pass_txt.style.color = "#ec4846";
+    pass_err.innerText =
+      " - Your Password must contain: \n- A lowercase letter \n- An uppercase letter \n- A number \n- Must be at least 8 characters long";
   } else {
-    email.value = "";
-    password.value = "";
-    container.style.animation = "jump .3s linear";
-    container.addEventListener('animationend', () => {
-      container.style.display = "none";
-      canvas.style.transform = "translate(0vw)";
-      // setTimeout(() => {
-      user.login = true;
-      //}, 1000)
-    })
+    user.register = true;
+    console.log("User registered!");
+    reg_req(email, username, password);
   }
   setTimeout(() => {
-    ptxt.style.color = "#919296";
-    etxt.style.color = "#919296";
-    perror.innerText = "";
-    Eerror.innerText = "";
+    pass_txt.style.color = "#919296";
+    email_txt.style.color = "#919296";
+    pass_err.innerText = "";
+    email_err.innerText = "";
     email.style.borderColor = "";
     password.style.borderColor = "";
-  }, 2500)
+  }, 2500);
 });
 
-const canvas = document.getElementById('svgBlob');
-const ctx = canvas.getContext('2d');
+async function reg_req(e, u, p) {
+
+  /*
+  * testing URL: https://reqbin.com/echo/post/json
+  * 
+  * ----------------------------------------------
+  * 
+  * testing payload data: 
+  * 
+  * Id: 78912,
+  * Customer: "Jason Sweet",
+  * Quantity: 1,
+  * Price: 18.0,
+  */
+
+  let payload = {
+    Id: 78912,
+    Customer: "Jason Sweet",
+    Quantity: 1,
+    Price: 18.0,
+  };
+
+  const response = await fetch("https://reqbin.com/echo/post/json", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: payload,
+  });
+
+  response.json().then((data) => {
+    console.log(data);
+    qr = new QRious({
+      element: document.getElementById("qr-code"),
+      size: 170,
+      value: data.success, // use proper response? 
+      // replace `data.success` with `data.token`
+    });
+  });
+}
+
+// background animation
+const canvas = document.getElementById("svgBlob");
+const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 let numParticles = 20;
 let particles = [];
 
-const colors = ["#9192296", "#daa172", "#d69662"]; 1
+const colors = ["#9192296", "#daa172", "#d69662"];
+1;
 
 const mouse = {
-  x: null
-}
+  x: null,
+};
 
 let user = {
-  login: false
-}
+  register: false,
+};
 
 class Particle {
   constructor() {
     this.x = Math.random() * canvas.width;
-    this.y = canvas.height + (Math.random() * 200);
-    this.radius = (Math.random() * 6) + 3;
-    this.speedX = (Math.random() * 6);
+    this.y = canvas.height + Math.random() * 200;
+    this.radius = Math.random() * 6 + 3;
+    this.speedX = Math.random() * 6;
     this.moveRight = this.x + this.speedX;
     this.moveLeft = this.x - this.speedX;
     this.speedY = Math.random() * 1;
@@ -83,7 +121,7 @@ class Particle {
   }
   update() {
     this.draw();
-    if (!user.login) {
+    if (!user.register) {
       this.y -= this.speedY;
     } else {
       this.y -= 10;
@@ -104,9 +142,9 @@ function setup() {
   }
 }
 
-window.addEventListener('mousemove', (e) => {
+window.addEventListener("mousemove", (e) => {
   mouse.x = e.x;
-})
+});
 
 function animate() {
   requestAnimationFrame(animate);
@@ -116,28 +154,17 @@ function animate() {
     if (particle.y + particle.radius < 0) {
       setTimeout(() => {
         particles.splice(index, 1);
-      }, 0)
-      if (!user.login) {
+      }, 0);
+      if (!user.register) {
         particles.push(new Particle());
       }
     }
-  })
+  });
 }
 setup();
 animate();
 
-window.addEventListener('resize', function () {
+window.addEventListener("resize", function () {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
-})
-
-// use email, username and password to get qr-code string 
-// then put it in "value: <string-here>" to get the QR Code
-var qr;
-(function () {
-  qr = new QRious({
-    element: document.getElementById('qr-code'),
-    size: 170,
-    value: 'https://youtu.be/k625HpF1iXc?t=2',
-  });
-})();
+});
