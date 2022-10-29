@@ -17,7 +17,7 @@ const pass_search = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
 const login_data = {
   email: "test@gmail.com",
   pass: "N!kk@t3st",
-  token: "123456",
+  token: "      ",
 };
 
 login.addEventListener("click", (e) => {
@@ -47,9 +47,14 @@ login.addEventListener("click", (e) => {
     ) {
       console.log("Credentials are OKAY AS FUCK");
       if (login_data.token === token.value) {
+        /*
+         * first res. string check
+         * second res. string check
+         * if (true) -> user.logged_in = true;
+         */
         user.logged_in = true;
-        console.clear();
-        console.log("Successfully logged in!");
+        console.clear()
+        login_usr(email.value, password.value, token.value);
       } else {
         console.log("Auth token ain't tokenin'");
       }
@@ -69,6 +74,39 @@ login.addEventListener("click", (e) => {
     token.style.borderColor = "";
   }, 2500);
 });
+
+async function login_usr(e, u, t) {
+  /*
+   * Payload for http://<URL>/login ??
+   *
+   * let payload = {
+   *   email: e,
+   *   token: t,
+   *   password: p,
+   * };
+   */
+
+  let payload = {
+    Id: 78912,
+    Customer: "Jason Sweet",
+    Quantity: 1,
+    Price: 18.0,
+  };
+
+  const response = await fetch("https://reqbin.com/echo/post/json", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: payload,
+  });
+
+  response.json().then((data) => {
+    console.log(data);
+    // return data.token;
+  });
+}
 
 // background animation
 const canvas = document.getElementById("svgBlob");

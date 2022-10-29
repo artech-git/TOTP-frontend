@@ -28,7 +28,7 @@ register.addEventListener("click", (e) => {
   } else {
     user.register = true;
     console.log("User registered!");
-    reg_req(email, username, password);
+    reg_req(email.password, username.value, password.value);
   }
   setTimeout(() => {
     pass_txt.style.color = "#919296";
@@ -41,19 +41,15 @@ register.addEventListener("click", (e) => {
 });
 
 async function reg_req(e, u, p) {
-
   /*
-  * testing URL: https://reqbin.com/echo/post/json
-  * 
-  * ----------------------------------------------
-  * 
-  * testing payload data: 
-  * 
-  * Id: 78912,
-  * Customer: "Jason Sweet",
-  * Quantity: 1,
-  * Price: 18.0,
-  */
+   * Payload for http://<URL>/signup ??
+   *
+   * let payload = {
+   *   email: e,
+   *   username: u,
+   *   password: p,
+   * };
+   */
 
   let payload = {
     Id: 78912,
@@ -76,7 +72,7 @@ async function reg_req(e, u, p) {
     qr = new QRious({
       element: document.getElementById("qr-code"),
       size: 170,
-      value: data.success, // use proper response? 
+      value: data.success, // use proper response?
       // replace `data.success` with `data.token`
     });
   });
